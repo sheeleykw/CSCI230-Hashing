@@ -42,39 +42,56 @@ public class TestHashing {
 		
 		long startTime;
 		long endTime;
+		long totalTime;
 		
 		System.out.println("OpenHash load factor = " + successfulHash.size() + "/" + openHash.getM());
 		System.out.println("ClosedHash load factor = " + successfulHash.size() + "/" + closedHash.getM());
 		
-		System.out.println("Successful Searches: OpenHashing.");
+		System.out.println("\nSuccessful Searches: OpenHashing.");
+		totalTime = 0;
 		for (int i = 0; i < successfulHash.size(); i ++) {
 			startTime = System.nanoTime();
 			openHash.search(successfulHash.get(i));
 			endTime = System.nanoTime();
-			System.out.println(endTime - startTime);
+			totalTime += endTime - startTime;
+			//System.out.println(endTime - startTime);
+			
 		}
-		System.out.println("Successful Searches: ClosedHashing.");
+		System.out.println("Average successful searches: " + Math.floorDiv(totalTime, (long)successfulHash.size()));
+		totalTime = 0;
+		
+		System.out.println("\nSuccessful Searches: ClosedHashing.");
 		for (int i = 0; i < successfulHash.size(); i ++) {
 			startTime = System.nanoTime();
 			closedHash.search(successfulHash.get(i));
 			endTime = System.nanoTime();
-			System.out.println(endTime - startTime);
+			totalTime += endTime - startTime;
+			//System.out.println(endTime - startTime);
 		}
+		System.out.println("Average successful searches: " + Math.floorDiv(totalTime, (long)successfulHash.size()));
+		totalTime = 0;
 		
-		System.out.println("Unsuccessful Searches: OpenHashing.");
+		System.out.println("\nUnsuccessful Searches: OpenHashing.");
 		for (int i = 0; i < unsuccessfulHash.size(); i ++) {
 			startTime = System.nanoTime();
 			openHash.search(unsuccessfulHash.get(i));
 			endTime = System.nanoTime();
-			System.out.println(endTime - startTime);
+			totalTime += endTime - startTime;
+			//System.out.println(endTime - startTime);
 		}
-		System.out.println("Unsuccessful Searches: ClosedHashing.");
+		System.out.println("Average unsuccessful searches: " + Math.floorDiv(totalTime, (long)unsuccessfulHash.size()));
+		totalTime = 0;
+		
+		System.out.println("\nUnsuccessful Searches: ClosedHashing.");
 		for (int i = 0; i < unsuccessfulHash.size(); i ++) {
 			startTime = System.nanoTime();
 			closedHash.search(unsuccessfulHash.get(i));
 			endTime = System.nanoTime();
-			System.out.println(endTime - startTime);
+			totalTime += endTime - startTime;
+			//System.out.println(endTime - startTime);
 		}
+		System.out.println("Average unsuccessful searches: " + Math.floorDiv(totalTime, (long)unsuccessfulHash.size()));
+		totalTime = 0;
 	}
 	
 	
